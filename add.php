@@ -5,13 +5,14 @@ include __DIR__ . "/includes/start.php";
 $book_id = $_REQUEST["id"] ?? 0;
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    if ($_POST["id"] !== 0) {
+    $titolo = $_POST["titolo"];
+    $autore = $_POST["autore"];
+    $anno = $_POST["anno_pubblicazione"];
+    $genere = $_POST["genere"];
+
+    if ($_POST["id"] != 0) {
         // echo "<pre>" . print_r($_POST, true) . "</pre>";
 
-        $titolo = $_POST["titolo"];
-        $autore = $_POST["autore"];
-        $anno = $_POST["anno_pubblicazione"];
-        $genere = $_POST["genere"];
 
         $stmt = $pdo->prepare("UPDATE libri SET titolo = :titolo , autore = :autore, anno_pubblicazione = :anno_pubblicazione, genere = :genere WHERE id = :id");
         $stmt->execute([
